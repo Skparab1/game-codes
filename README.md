@@ -11,3 +11,4 @@ Set of game codes
 ## Shooter game
 - interactive game in which user has to fire bullets using override to hit obstacles
 - still under development
+### All of these games are locally and independently played, not over a server
