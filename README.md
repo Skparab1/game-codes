@@ -1,7 +1,9 @@
 # game-codes
 Set of interactive game codes
 ## Dino game
--Game replicating google chrome's no internet game
+- Game replicating google chrome's no internet game
+- jump by pressing control+c
+- more information in dino-game repository
 ## Game code
 - compliling multiple games
 ## Grocery store game 
