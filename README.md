@@ -1,5 +1,5 @@
 # game-codes
-Set of game codes
+Set of interactive game codes
 ## Dino game
 -Game replicating google chrome's no internet game
 ## Game code
