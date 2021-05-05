@@ -28,4 +28,6 @@ Set of interactive game codes
 - interactive game in which user has to fire bullets using override to hit obstacles
 - shooter will chnage direction every second
 - still under development
+## Crossy Road
+- Crossy road in Python shell
 ### All of these games are locally and independently played, not over a server
