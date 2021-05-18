@@ -7,6 +7,22 @@ high = 0000
 speed = 0.05
 newscore = False
 import shelve
+def shelvewrite(textfilename,towrite): #write to text file
+    textfilenametxt = textfilename + '.txt'
+    writer = shelve.open(str(textfilenametxt))
+    writer[str(textfilename)] = towrite
+    writer.close()
+def shelveread(textfilename): # read form text file
+    textfilenametxt = textfilename + '.txt'
+    reader = shelve.open(str(textfilenametxt))
+    text = reader[str(textfilename)]
+    reader.close()
+    return text
+def shelveappend(textfilename, toappend): #append to text file
+    textfilenametxt = textfilename + '.txt'
+    read = shelveread(textfilename)
+    toappend = (read, toappend)
+    shelvewrite(textfilename, toappend)
 """reader = shelve.open('dino1stplace.txt')   
 reader['dino1stplace'] = '1000'       
 reader.close()
