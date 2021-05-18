@@ -9,7 +9,7 @@ Set of interactive game codes
 - Game replicating google chrome's no internet game
 - jump by pressing control+c
 - more information in dino-game repository
-
+![](dino_game_demo.gif)
 ## Game code
 - compliling multiple games
 - Secret number (same as secret number below)
