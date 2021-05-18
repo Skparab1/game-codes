@@ -1,6 +1,7 @@
 # game-codes
 Set of interactive game codes
 ## _New!_ Crossy road
+- Replicating the video game crossy road in Python shell (not graphics window)
 ## Dino game
 - Game replicating google chrome's no internet game
 - jump by pressing control+c
