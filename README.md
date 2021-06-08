@@ -4,26 +4,31 @@ Set of interactive game codes
 - Replicating the video game pong in Python
 - How to play:
   - press control c to move paddle up
-![](crossy_road_demo.gif)
+
+![](pong_demo_3.gif)
 ## Flappy bird
 - Replicating the video game flappy bird in Python
 - How to play:
   - press control c to move up
-![](crossy_road_demo.gif)
+
+![](flappy_bird_demo_v0.0.4.gif)
 ## Crossy road
 - Replicating the video game crossy road in Python
 - How to play:
   - press control c to move foreward
+
 ![](crossy_road_demo.gif)
 ## Dino game
 - Game replicating google chrome's no internet game
 - jump by pressing control+c
+
 ![](dino_game_demo.gif)
 ## Snake game
 - Replicating the video game crossy road in Python shell (not graphics window)
 - How to play:
   - press control c to turn (smart-turn technology will detect which way to turn)
-![](crossy_road_demo.gif)
+
+![](snake_game_demo.gif)
 ## Game code
 - compliling multiple games
 - Secret number (same as secret number below)
