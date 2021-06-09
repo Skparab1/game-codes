@@ -51,6 +51,6 @@ Set of interactive game codes
 - program will tell wether guess is too high or too low
 ## Shooter game
 - interactive game in which user has to fire bullets using override to hit obstacles
-- shooter will chnage direction every second
+- shooter will change direction every second
 - still under development
 ### All of these games are locally and independently played, not over a server
