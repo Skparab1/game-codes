@@ -238,35 +238,53 @@ while choice != 'q':
     choice = input('Type your choice followed by enter: ')
     choice = choice.lower()
     if choice == 'p':
-        #run pong
-        clearscreen()
-        movedirection = 'right'
-        autoplay = False
+        # run pong
+        # initialize variables
+        # ask for name and set up autoplay if required
         print('Pong')
         print('How to play: press contol + c to move your paddle up')
         name = input('enter your name ')
         if name == 'autoplay':
             autoplay, name = True, 'Autoplay Computer'
+        movedirection = 'right'
+        autoplay = False
         pos = 49
         angle = 2
         score = 0
         waittime = 0.1
+        midlinealt = 1
+
+        # initialize more variables
         padpos = 8
-        pos = 8
+        spos = 8
         apos = 8
         p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18 = '','','','','','','','|','|','|','|','','','','','','',''
         s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18 = ' ',' ',' ',' ',' ',' ',' ','|','|','|','|',' ',' ',' ',' ',' ',' ',' '
         line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18 = ' '*100,' '*100,' '*100,' '*100,' '*100,' '*100,' '*100,' '*100,((' '*50)+'o'+(' '*49)),' '*100,' '*100,' '*100,' '*100,' '*100,' '*100,' '*100,' '*100,' '*100
-        printarena(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18)
         lost = 10
+
+        # print arena first
+        printarena(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18)
+
+        # while the user has not lost, keep moving the ball
         while True:
+
+            # do this if the user has not press control + c
             try:
-                time.sleep(waittime)
+                time.sleep(waittime) # wait
+
+                #move ball
                 line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18 = moveball(movedirection,line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18)
+                #print the arena
                 printarena(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18)
+                
+                # if the balls position is on the right side
                 if ((pos >= 98 and angle > 2) or pos >= 98) and lost > 9:
                     ln = 1 if ('o' in line1 ) else (2 if ('o' in line2 ) else (3 if ('o' in line3 ) else (4 if ('o' in line4 ) else (5 if ('o' in line5 ) else (6 if ('o' in line6 ) else (7 if ('o' in line7 ) else (8 if ('o' in line8 ) else (9 if ('o' in line9 ) else (10 if ('o' in line10 ) else (11 if ('o' in line11 ) else (12 if ('o' in line12 ) else (13 if ('o' in line13 ) else (14 if ('o' in line14 ) else (15 if ('o' in line15 ) else (16 if ('o' in line16 ) else (17 if ('o' in line17 ) else 18))))))))))))))))
+                    
+                    # if the user has hit the ball
                     if (ln == 1 and '|' in p1) or (ln == 2 and '|' in p2) or (ln == 3 and '|' in p3) or (ln == 4 and '|' in p4) or (ln == 5 and '|' in p5) or (ln == 6 and '|' in p6) or (ln == 7 and '|' in p7) or (ln == 8 and '|' in p8) or (ln == 9 and '|' in p9) or (ln == 10 and '|' in p10) or (ln == 11 and '|' in p11) or (ln == 12 and '|' in p12) or (ln == 13 and '|' in p13) or (ln == 14 and '|' in p14) or (ln == 15 and '|' in p15) or (ln == 16 and '|' in p16) or (ln == 17 and '|' in p17) or (ln == 18 and '|' in p18):
+                        #make the ball bounce off in a random direciton
                         rand = randint(1,7)
                         if rand == 1 or rand == 2 or rand == 3:
                             movedirection = 'leftup'
@@ -277,11 +295,13 @@ while choice != 'q':
                         else:
                             movedirection = 'left'
                             angle = 3
-                    elif autoplay == False:
+                    elif autoplay == False: # if autoplay is off then user has lost
                         lost = 0
                     score += 1
-                    if pos <= 3:
-                        rand = randint(1,5)
+
+                # if the ball is on the left side
+                if pos <= 3: # bounce off in a random angle
+                    rand = randint(1,5)
                     if rand == 1 or rand == 2 or rand == 3:
                         movedirection = 'rightup'
                         angle = randint(2,4)
@@ -291,50 +311,68 @@ while choice != 'q':
                     else:
                         movedirection = 'right'
                         angle = 3
+                
+                # if ball has hit the bottom of the arena, change direction to upward
                 if 'o' in line1:
                     if movedirection == 'leftdown':
                         movedirection = 'leftup'
                     else:
                         movedirection = 'rightup'
+                
+                # if ball has hit top, change direction to downward
                 if 'o' in line18:
                     if movedirection == 'leftup':
                         movedirection = 'leftdown'
                     else:
                         movedirection = 'rightdown'
-                lost += 1
-                if lost == 2:
+
+                lost += 1 # upgrading lost, so when the user has lost, it will break
+                if lost == 2: # break if user has lost
                     print('you have lost')
                     break
+
+                # finding ou the line in which the ball is in
                 linein = 1 if ('o' in line1 ) else (1 if ('o' in line2 ) else (2 if ('o' in line3 ) else (2 if ('o' in line4 ) else (3 if ('o' in line5 ) else (4 if ('o' in line6 ) else (5 if ('o' in line7 ) else (6 if ('o' in line8 ) else (7 if ('o' in line9 ) else (8 if ('o' in line10 ) else (9 if ('o' in line11 ) else (10 if ('o' in line12 ) else (11 if ('o' in line13 ) else (12 if ('o' in line14 ) else (13 if ('o' in line15 ) else (14 if ('o' in line16 ) else (15 if ('o' in line17 ) else 16))))))))))))))))
                 padstorer = padpos
                 padpos = round(padpos)
+
+                # if the ball is close to computer's paddle and coming towards it, then move the paddle towards the ball
                 if ((pos <= 40 and angle >= 3) or (pos <= 25 and angle == 2) or pos <= 20) and (movedirection == 'left' or movedirection == 'leftup' or movedirection == 'leftdown'):
                     if spos > linein:
                         spos -= 1
                     if spos <= linein and spos <= 13:
-                        spos += 1   
+                        spos += 1 
+                    # reassign the paddle displaying variables for computer's paddle  
                     s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18 = '|' if spos == 1 else ' ','|' if spos == 1 or spos == 2 else ' ','|' if spos == 1 or spos == 2 or spos == 3 else ' ','|' if spos == 1 or spos == 2 or spos == 3 or spos == 4 else ' ','|' if spos == 2 or spos == 3 or spos == 4 or spos == 5 else ' ','|' if spos == 3 or spos == 4 or spos == 5 or spos == 6 else ' ','|' if spos == 4 or spos == 5 or spos == 6 or spos == 7 else ' ','|' if spos == 5 or spos == 6 or spos == 7 or spos == 8 else ' ','|' if spos == 6 or spos == 7 or spos == 8 or spos == 9 else ' ','|' if spos == 7 or spos == 8 or spos == 9 or spos == 10 else ' ','|' if spos == 8 or spos == 9 or spos == 10 or spos == 11 else ' ','|' if spos == 9 or spos == 10 or spos == 11 or spos == 12 else ' ','|' if spos == 10 or spos == 11 or spos == 12 or spos == 12 else ' ','|' if spos == 11 or spos == 12 or spos == 13 or spos == 14 else ' ','|' if spos == 12 or spos == 13 or spos == 14 or spos == 15 else ' ','|' if spos == 13 or spos == 14 or spos == 15 or spos == 16 else ' ','|' if spos == 14 or spos == 15 or spos == 16 or spos == 17 else ' ','|' if spos == 15 or spos == 16 or spos == 17 or spos == 18 else ' '
+        
+                # if autoplay is enabled and the ball is close to user's paddle and coming towards it, then move the paddle towards the ball
                 if (((pos >= 60 and angle >= 3) or (pos >= 75 and angle == 2) or pos >= 85) and (movedirection == 'right' or movedirection == 'rightup' or movedirection == 'rightdown')) and autoplay == True:
                     if apos > linein:
                         apos -= 1
                     if apos <= linein and apos <= 13:
                         apos += 1
-                    padpos = apos
+                    padpos = apos # reassign the changed paddle position to the actual paddle position
+
+                # reassign the paddle displaying variables for user's paddle    
                 p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18 = '|' if padpos == 1  or padpos == 2 else '','|' if padpos == 1 or padpos == 2 or padpos == 3 else '','|' if padpos == 1 or padpos == 2 or padpos == 3  or padpos == 4 else '','|' if padpos == 1 or padpos == 2 or padpos == 3 or padpos == 4 or padpos == 5 else '','|' if padpos == 2 or padpos == 3 or padpos == 4 or padpos == 5 or padpos == 6 else '','|' if padpos == 3 or padpos == 4 or padpos == 5 or padpos == 6  or padpos == 7 else '','|' if padpos == 4 or padpos == 5 or padpos == 6 or padpos == 7  or padpos == 8 else '','|' if padpos == 5 or padpos == 6 or padpos == 7 or padpos == 8  or padpos == 9 else '','|' if padpos == 6 or padpos == 7 or padpos == 8 or padpos == 9  or padpos == 10 else '','|' if padpos == 7 or padpos == 8 or padpos == 9 or padpos == 10  or padpos == 11 else '','|' if padpos == 8 or padpos == 9 or padpos == 10 or padpos == 11 or padpos == 12 else '','|' if padpos == 9 or padpos == 10 or padpos == 11 or padpos == 12  or padpos == 13 else '','|' if padpos == 10 or padpos == 11 or padpos == 12 or padpos == 13 or padpos == 14 else '','|' if padpos == 11 or padpos == 12 or padpos == 13 or padpos == 14 or padpos == 15 else '','|' if padpos == 12 or padpos == 13 or padpos == 14 or padpos == 15  or padpos == 16 else '','|' if padpos == 13 or padpos == 14 or padpos == 15 or padpos == 16  or padpos == 17 else '','|' if padpos == 14 or padpos == 15 or padpos == 16 or padpos == 17  or padpos == 18 else '','|' if padpos == 14 or padpos == 15 or padpos == 16 or padpos == 17 or padpos == 18 else ''
+                
+                # print score
                 print('Score: ',score,'    ',movedirection)
-                if padpos > 1 and autoplay == False:
+
+                # if autoplay is not on, then move the paddle down slightly
+                if padpos > 2 and autoplay == False:
                     padpos = padstorer
-                    padpos -= 0.3
-            except:
-                if padpos <= 13 and autoplay == False:
-                    padpos += 2
-            finally:
-                blank = ''
-        print('your score was ',score)
-        input('press enter to continue')
+                    padpos -= 0.5
+
+            except: # if user presses control + c
+                if padpos <= 13 and autoplay == False: # if paddle is not at max height and autoplay is not enabled
+                        padpos += 2 # move paddle up a bit       
+        print('your score was ',score),input()
+
     if choice == 'f':
         held = False
         clearscreen()
+        print('Flappy bird')
         name = input('Enter your name: ')
         height = 10
         mover = 'up'
@@ -495,10 +533,10 @@ while choice != 'q':
                 break
             except:
                 blank = '' 
-        input('press enter to continue')    
+
     if choice == 'c':
         skipped = 'yep'
-        if True
+        if True:
             clearscreen()
             print('Crossy Road'), print('___________\n\n'), print('How to play'), print(' 1. Press control+c to move foreward'), print(' 2. When you hit an obstacle the game will end\n\n'), print(' Select a level or type s for scoreboard\n'), print(' Easy * Medium * Hard * Very hard * Xpert * Scoreboard')
             level = input('\n Type the first letter of your choice ')
@@ -621,7 +659,7 @@ while choice != 'q':
                     score += 100
                     skipped = 'yep'
             appended = False
-            while True:
+            while appended:
                 try:
                     clearscreen()
                     print('you have lost')
